@@ -19,4 +19,11 @@ router.post("/students", (req, res) =>{
     student.then(generatedStudent => res.status(200).json(generatedStudent)).catch(err => res.status(400).json(err.message))
 })
 
+router.update("/student/:rm", (req, res) => {
+    const { rm } = req.params
+    const alterStudent = req.body
+})
+
+
+
 module.exports = router

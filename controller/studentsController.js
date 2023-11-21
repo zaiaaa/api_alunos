@@ -10,6 +10,9 @@ class StudentsController{
     newStudent(newStudent){
         return studentsModel.addNewStudent(newStudent)
     }
+    alterStudent(newStudent, rm){
+        return studentsModel.alterStudent(newStudent, rm)
+    }
 }
 
 module.exports = new StudentsController()

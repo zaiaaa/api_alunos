@@ -40,6 +40,19 @@ class StudentsModel{
             })
         })
     }
+
+    alterStudent(newStudent, rm){
+        const sql = "UPDATE atendimentos SET ? WHERE id = ?"
+        return new Promise((res, rej) =>{
+            conexao.query(sql, [newStudent, rm], (err, resp) =>{
+                if(err){
+                    console.log('Erro ao atualizar estudante ->', err)
+                    rej(err)
+                }
+                res(resp)
+            })
+        })
+    }
 }
 
 module.exports = new StudentsModel
