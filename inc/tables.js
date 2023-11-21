@@ -17,7 +17,7 @@ class Tabelas{
 
         this.conn.query(sql, (e) => {
             if(e){
-                console.log('error -> ', e.message)
+                console.log('error -> ', e)
                 return
             }
             console.log('tabela roomClass criada com sucesso')
@@ -36,7 +36,7 @@ class Tabelas{
         `
         this.conn.query(sql, (e) => {
             if(e){
-                console.log('error -> ', e.message)
+                console.log('error -> ', e)
                 return
             }
             console.log('tabela students criada com sucesso')
