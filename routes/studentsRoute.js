@@ -21,7 +21,9 @@ router.post("/students", (req, res) =>{
 
 router.put("/student/:rm", (req, res) => {
     const { rm } = req.params
-    const alterStudent = req.body
+    const newStudent = req.body
+    const alterStudent = controller.alterStudent(newStudent, rm)
+    alterStudent.then(alteredStudent => res.status(201).json(alteredStudent)).catch(err => res.status(400).json(err.message))
 })
 
 

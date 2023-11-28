@@ -42,7 +42,7 @@ class StudentsModel{
     }
 
     alterStudent(newStudent, rm){
-        const sql = "UPDATE atendimentos SET ? WHERE id = ?"
+        const sql = "UPDATE students SET ? WHERE rm = ?"
         return new Promise((res, rej) =>{
             conexao.query(sql, [newStudent, rm], (err, resp) =>{
                 if(err){
