@@ -16,6 +16,9 @@ class StudentsController{
     alterStudent(newStudent, rm){
         return studentsModel.alterStudent(newStudent, rm)
     }
+    deleteStudent(rm){
+        return studentsModel.deleteStudent(rm)
+    }
 }
 
 module.exports = new StudentsController()

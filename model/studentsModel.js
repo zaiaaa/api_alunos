@@ -3,7 +3,7 @@ const conexao = require('../inc/connection')
 
 class StudentsModel{
     get(){
-        const sql = "SELECT * FROM students"
+        const sql = "SELECT * FROM students ORDER BY name"
         return new Promise((res, rej) => {
             conexao.query(sql, {}, (error, resposta) => {
                 if(error){
@@ -61,6 +61,20 @@ class StudentsModel{
             conexao.query(sql, [newStudent, rm], (err, resp) =>{
                 if(err){
                     console.log('Erro ao atualizar estudante ->', err)
+                    rej(err)
+                }
+                res(resp)
+            })
+        })
+    }
+
+    deleteStudent(rm){
+        const sql = `DELETE FROM students WHERE rm = ${rm}`
+
+        return new Promise((res, rej) => {
+            conexao.query(sql, rm, (err, resp) => {
+                if(err){
+                    console.log('Erro ao deletar estudante ->', err)
                     rej(err)
                 }
                 res(resp)
