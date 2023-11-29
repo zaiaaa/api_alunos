@@ -19,10 +19,21 @@ router.get('/studentsPerRoom/:roomId', (req, res) => {
     listStudentsPerRoom.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
 })
 
-router.post("/students", (req, res) =>{
+router.post("/students", async (req, res) =>{
     const newStudent = req.body
-    const student = controller.newStudent(newStudent)
-    student.then(generatedStudent => res.status(200).json(generatedStudent)).catch(err => res.status(400).json(err.message))
+    
+    const studentCpf = controller.get()
+    const cpfs = await studentCpf.then(estudante => estudante)
+
+    cpfExists = cpfs.filter(cpf => cpf.cpf === newStudent.cpf)
+
+    if(cpfExists.length > 0){
+        res.status(401).json({message: "cpf já existente"})
+        return
+    }else{
+        const student = controller.newStudent(newStudent)
+        student.then(generatedStudent => res.status(200).json(generatedStudent)).catch(err => res.status(400).json(err.message))
+    }
 })
 
 router.put("/student/:rm", (req, res) => {
@@ -33,6 +44,12 @@ router.put("/student/:rm", (req, res) => {
 })
 
 
+router.delete("/deleteStudent/:rm", (req, res) => {
+    const {rm} = req.params
+    const deleteStudent = controller.deleteStudent(rm)
+    deleteStudent.then(deletedStudent => res.status(200).json(deletedStudent)).catch(err => json(err.message))
+
+})
 
 
 
