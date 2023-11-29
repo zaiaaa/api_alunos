@@ -28,6 +28,20 @@ class StudentsModel{
         })
     }
 
+    getByRoom(roomId){
+        const sql = `SELECT * FROM students WHERE fk_id_class = ${roomId}`
+
+        return new Promise((res, rej) => {
+            conexao.query(sql, roomId, (err, resp) =>{
+                if(err){
+                    console.log('Erro -> ', err)
+                    rej(err)
+                }
+                res(resp)
+            })
+        })
+    }
+
     addNewStudent(newStudent){
         const sql = "INSERT INTO students SET ?"
         return new Promise((res, rej) => {

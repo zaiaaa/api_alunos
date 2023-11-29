@@ -13,6 +13,12 @@ router.get("/students/:rm", (req, res) => {
     listStudentsByRm.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
 })
 
+router.get('/students/:roomId', (req, res) => {
+    const roomId = req.params.roomId
+    const listStudentsPerRoom = controller.getByRoom(roomId)
+    listStudentsPerRoom.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
+})
+
 router.post("/students", (req, res) =>{
     const newStudent = req.body
     const student = controller.newStudent(newStudent)

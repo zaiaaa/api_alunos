@@ -7,6 +7,9 @@ class StudentsController{
     getByRm(rm){
         return studentsModel.getByRm(rm)
     }
+    getByRoom(RoomId){
+        return studentsModel.getByRoom(RoomId)
+    }
     newStudent(newStudent){
         return studentsModel.addNewStudent(newStudent)
     }
