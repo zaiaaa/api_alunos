@@ -1,4 +1,4 @@
-const { Router, response } = require('express')
+const { Router } = require('express')
 const router = Router()
 const controller = require('../controller/studentsController')
 
@@ -13,7 +13,7 @@ router.get("/students/:rm", (req, res) => {
     listStudentsByRm.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
 })
 
-router.get('/students/:roomId', (req, res) => {
+router.get('/studentsPerRoom/:roomId', (req, res) => {
     const roomId = req.params.roomId
     const listStudentsPerRoom = controller.getByRoom(roomId)
     listStudentsPerRoom.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
@@ -31,6 +31,8 @@ router.put("/student/:rm", (req, res) => {
     const alterStudent = controller.alterStudent(newStudent, rm)
     alterStudent.then(alteredStudent => res.status(201).json(alteredStudent)).catch(err => res.status(400).json(err.message))
 })
+
+
 
 
 

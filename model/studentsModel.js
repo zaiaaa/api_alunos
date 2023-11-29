@@ -45,7 +45,7 @@ class StudentsModel{
     addNewStudent(newStudent){
         const sql = "INSERT INTO students SET ?"
         return new Promise((res, rej) => {
-            conexao.query(sql, newStudent, (err, resposta) => {
+            conexao.query(sql, newStudent, (err, resposta) => {                
                 if(err){
                     console.log('error -> ', err.message)
                     rej(err)
