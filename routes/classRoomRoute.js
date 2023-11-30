@@ -38,3 +38,5 @@ router.delete("/deleteClassRoom/:id", (req, res) => {
 })
 
 module.exports = router
+
+//TODO proteger as todas as rotas, exceto as de get. 
