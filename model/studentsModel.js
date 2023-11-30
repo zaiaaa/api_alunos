@@ -1,4 +1,4 @@
-const studentsController = require('../controller/studentsController')
+//const studentsController = require('../controller/studentsController')
 const conexao = require('../inc/connection')
 
 class StudentsModel{
