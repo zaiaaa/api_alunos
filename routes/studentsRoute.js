@@ -2,7 +2,10 @@ const { Router } = require('express')
 const router = Router()
 const studentsController = require('../controller/studentsController')
 
-router.get("/students", (req, res) => {
+const middleware = require('../middleware/auth')
+
+
+router.get("/students",(req, res) => {
     const listStudents = studentsController.get()
     listStudents.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
 })
@@ -19,7 +22,7 @@ router.get('/studentsPerRoom/:roomId', (req, res) => {
     listStudentsPerRoom.then(student => res.status(200).json(student)).catch(err => res.status(400).json(err.message))
 })
 
-router.post("/students", async (req, res) =>{
+router.post("/students", middleware, async (req, res) =>{
     const newStudent = req.body
     
     const studentCpf = studentsController.get()
@@ -36,7 +39,7 @@ router.post("/students", async (req, res) =>{
     }
 })
 
-router.put("/student/:rm", (req, res) => {
+router.put("/student/:rm", middleware,(req, res) => {
     const { rm } = req.params
     const newStudent = req.body
     const alterStudent = studentsController.alterStudent(newStudent, rm)
@@ -44,7 +47,7 @@ router.put("/student/:rm", (req, res) => {
 })
 
 
-router.delete("/deleteStudent/:rm", (req, res) => {
+router.delete("/deleteStudent/:rm", middleware,(req, res) => {
     const {rm} = req.params
     const deleteStudent = studentsController.deleteStudent(rm)
     deleteStudent.then(deletedStudent => res.status(200).json(deletedStudent)).catch(err => json(err.message))

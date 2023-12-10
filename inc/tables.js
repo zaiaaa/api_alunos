@@ -3,6 +3,7 @@ class Tabelas{
         this.conn = conn
         this.createClassTable()
         this.createStudentTable()
+        this.createUsersTable()
     }
 
     createClassTable(){
@@ -40,6 +41,25 @@ class Tabelas{
                 return
             }
             console.log('tabela students criada com sucesso')
+        })
+    }
+
+    createUsersTable(){
+        const sql = `
+            CREATE TABLE IF NOT EXISTS users (
+                rm INT PRIMARY KEY,
+                email VARCHAR(150),
+                password VARCHAR(40),
+                FOREIGN KEY (rm) REFERENCES students(rm)
+            );
+        `
+
+        this.conn.query(sql, (e) => {
+            if(e){
+                console.log('error -> ', e)
+                return
+            }
+            console.log('tabela de usuarios criada com sucesso!')
         })
     }
 }
