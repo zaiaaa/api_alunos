@@ -28,7 +28,7 @@ class AuthModel{
                     )
                     res(token)
                 }else{
-                    rej("Usuário e/ou senha não não existem")
+                    rej("Email ou senha incorretos!")
                 }
         
         })

@@ -6,7 +6,7 @@ const middleware = require('../middleware/auth')
 
 const bcrypt = require('bcrypt')
 const saltRound = 10
-
+//a
 
 router.get('/users', middleware ,(req, res) => {
     const listUsers = usersController.get()
