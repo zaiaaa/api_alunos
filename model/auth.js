@@ -10,7 +10,7 @@ class AuthModel{
                     rej("Usuário e senha não informados")
                 }
 
-                const user = {nome: process.env.NOME, email: process.env.EMAIL, pass: process.env.SENHA}
+                const user = {nome: process.env.NOME, email: '000000', pass: process.env.SENHA}
                 //Futuramente pegar usuários do banco
 
                 console.log(user.nome)

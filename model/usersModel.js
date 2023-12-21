@@ -13,6 +13,19 @@ class UsersModel{
         })
     }
 
+    logUser(rm, password){
+        const sql = "SELECT * FROM users WHERE rm = ? AND password = ?"
+        return new Promise((res, rej) => {
+            conexao.query(sql, [rm, password], (err, resp) => {
+                if(err){                    
+                    rej(err)
+                }
+                res(resp)
+            })
+        }) 
+    
+    }
+
     newUser(newUser){
         const sql = `INSERT INTO users SET ?`
 
