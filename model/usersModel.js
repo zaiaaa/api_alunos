@@ -1,6 +1,20 @@
 const conexao = require('../inc/connection')
+const bcrypt = require('bcrypt')
 
 class UsersModel{
+    
+    executarQuery(sql, parametros=""){
+        return new Promise((res, rej) => {
+            conexao.query(sql, parametros, (err, resp) => {
+                if(err){
+                    console.log('erro -> ', err.message)
+                    rej(err)
+                }
+                res(resp)
+            })
+        })
+    }
+    
     get(){
         const sql = "SELECT * FROM users"
         return new Promise((res, rej) => {
@@ -13,17 +27,23 @@ class UsersModel{
         })
     }
 
-    logUser(rm, password){
-        const sql = "SELECT * FROM users WHERE rm = ? AND password = ?"
-        return new Promise((res, rej) => {
-            conexao.query(sql, [rm, password], (err, resp) => {
-                if(err){                    
-                    rej(err)
-                }
-                res(resp)
-            })
-        }) 
-    
+    async logUser(rm, password){
+        const sql = "SELECT * FROM users WHERE rm = ?"
+        const user = await this.executarQuery(sql, [rm])
+        console.log(user)
+        //console.log(user[0].password)
+        
+        const passwordBanco = user[0].password
+
+        const isCorrectPassword = await bcrypt.compare(password, passwordBanco) 
+
+        console.log(isCorrectPassword)
+
+        if (isCorrectPassword) {
+            return user;
+        } else {
+            return 'wrong password';
+        }
     }
 
     newUser(newUser){
