@@ -4,8 +4,8 @@ class ClassController{
     get(){
         return roomModel.get()
     }
-    getById(id){
-        return roomModel.getById(id)
+    getByName(name){
+        return roomModel.getByName(name)
     }
     addNewClass(newClass){
         return roomModel.addNewClass(newClass)

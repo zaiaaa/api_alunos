@@ -13,11 +13,11 @@ class ClassRoomModel{
             })
         })
     }
-    getById(id){
-        const sql = `SELECT * FROM roomclass WHERE id = ${id}`
+    getByName(name){
+        const sql = `SELECT * FROM roomclass WHERE name LIKE ?`
 
         return new Promise((res, rej) => {
-            conn.query(sql, id, (error, resposta) => {
+            conn.query(sql, [`%${name}%`], (error, resposta) => {
                 if(error){
                     console.log('Erro -> ', error.message)
                     rej(error)

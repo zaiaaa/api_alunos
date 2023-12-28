@@ -7,9 +7,9 @@ router.get('/classRoom', (req, res) =>{
     listClasses.then(classes => res.status(200).json(classes)).catch(err => res.status(400).json(err.message))
 })
 
-router.get("/classRoom/:id", (req, res) => {
-    const {id} = req.params
-    const listClasses = classRoomController.getById(id)
+router.get("/classRoom/:name", (req, res) => {
+    const {name} = req.params
+    const listClasses = classRoomController.getByName(name)
     listClasses.then(classes => res.status(200).json(classes)).catch(err => res.status(400).json(err.message))
 })
 
