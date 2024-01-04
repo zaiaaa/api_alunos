@@ -1,5 +1,7 @@
 const conexao = require('../inc/connection')
 const bcrypt = require('bcrypt')
+const auth = require('./authUser')
+const { json } = require('express')
 
 class UsersModel{
     
@@ -39,8 +41,9 @@ class UsersModel{
 
         console.log(isCorrectPassword)
 
+
         if (isCorrectPassword) {
-            return user;
+            return auth.tryAuth(user[0])
         } else {
             return 'wrong password';
         }
