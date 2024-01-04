@@ -50,6 +50,7 @@ class Tabelas{
                 rm INT PRIMARY KEY,
                 email VARCHAR(150),
                 password VARCHAR(40),
+                photo VARCHAR(50),
                 FOREIGN KEY (rm) REFERENCES students(rm)
             );
         `
