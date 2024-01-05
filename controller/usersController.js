@@ -10,6 +10,9 @@ class UsersController{
     logUser(rm, password){
         return usersModel.logUser(rm, password)
     }
+    altUser(altUser, rm){
+        return usersModel.altUser(altUser, rm)
+    }
 }
 
 module.exports = new UsersController()

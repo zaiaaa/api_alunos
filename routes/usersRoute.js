@@ -38,9 +38,21 @@ router.post('/users', async (req, res) => {
     const users = usersController.newUser(newUser)
 
     users.then(users => res.status(201).json(users)).catch(err => res.status(400).json(err.message))
-
 })
 
+router.put('/users/alt/:rm', async (req, res) => {
+    const altUser = req.body
+    const {rm} = req.params
+
+    const {password} = altUser
+
+    const salt = await bcrypt.genSalt(saltRound);
+    const hash = await bcrypt.hash(password, salt);
+
+    altUser.password = hash
+
+    usersController.altUser(altUser, rm).then(users => res.status(201).json(users)).catch(err => res.status(400).json(err.message))
+})
 
 
 module.exports = router

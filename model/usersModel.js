@@ -62,6 +62,20 @@ class UsersModel{
             })
         })
     }
+
+    altUser(altUser, rm){
+        const sql = "UPDATE users SET ? WHERE rm = ?"
+
+        return new Promise((res, rej) => {
+            conexao.query(sql, [altUser, rm], (err, resposta) => {                
+                if(err){
+                    console.log('error -> ', err.message)
+                    rej(err)
+                }
+                res(resposta)
+            })
+        })
+    }
 }
 
 module.exports = new UsersModel
