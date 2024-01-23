@@ -27,6 +27,20 @@ class ClassRoomModel{
         })
     }
 
+    getById(id){
+        const sql = `SELECT * FROM roomclass WHERE id = ?`
+
+        return new Promise((res, rej) => {
+            conn.query(sql, id, (error, resposta) => {
+                if(error){
+                    console.log('Erro -> ', error.message)
+                    rej(error)
+                }
+                res(resposta)
+            })
+        })
+    }
+
     addNewClass(newClass){
         const sql = "INSERT INTO roomclass SET ?"
         return new Promise((res, rej) => {

@@ -4,6 +4,9 @@ class UsersController{
     get(){
         return usersModel.get()
     }
+    getByRm(rm){
+        return usersModel.getByRm(rm)
+    }
     newUser(newUser){
         return usersModel.newUser(newUser)
     }

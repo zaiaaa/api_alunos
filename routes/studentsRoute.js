@@ -47,7 +47,7 @@ router.put("/student/:rm", middleware,(req, res) => {
 })
 
 
-router.delete("/deleteStudent/:rm", middleware,(req, res) => {
+router.delete("/deleteStudent/:rm", middleware ,(req, res) => {
     const {rm} = req.params
     const deleteStudent = studentsController.deleteStudent(rm)
     deleteStudent.then(deletedStudent => res.status(200).json(deletedStudent)).catch(err => json(err.message))

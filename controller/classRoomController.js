@@ -7,6 +7,9 @@ class ClassController{
     getByName(name){
         return roomModel.getByName(name)
     }
+    getById(id){
+        return roomModel.getById(id)
+    }
     addNewClass(newClass){
         return roomModel.addNewClass(newClass)
     }

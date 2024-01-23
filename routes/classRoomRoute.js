@@ -7,10 +7,18 @@ router.get('/classRoom', (req, res) =>{
     listClasses.then(classes => res.status(200).json(classes)).catch(err => res.status(400).json(err.message))
 })
 
+
+
 router.get("/classRoom/:name", (req, res) => {
     const {name} = req.params
     const listClasses = classRoomController.getByName(name)
     listClasses.then(classes => res.status(200).json(classes)).catch(err => res.status(400).json(err.message))
+})
+
+router.get("/classRoom/id/:id", (req, res) => {
+    const {id} = req.params
+    const list =  classRoomController.getById(id)
+    list.then(classes => res.status(200).json(classes)).catch(err => res.status(400).json(err.message))
 })
 
 router.post("/classRoom", (req, res) => {

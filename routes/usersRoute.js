@@ -13,6 +13,11 @@ router.get('/users', middleware ,(req, res) => {
     listUsers.then(users => res.status(200).json(users)).catch(err => res.status(400).json(err.message))
 })
 
+router.get('/users/:rm', (req, res) => {
+    const {rm} = req.params
+    usersController.getByRm(rm).then(users => res.status(200).json(users)).catch(err => res.status(400).json(err.message))
+})
+
 
 router.get('/logUser', middleware, async (req, res) => {
     const rm = req.query.rm

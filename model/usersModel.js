@@ -29,6 +29,19 @@ class UsersModel{
         })
     }
 
+    getByRm(rm){
+        const sql = "SELECT * FROM users WHERE rm = ?"
+        
+        return new Promise((res, rej) => {
+            conexao.query(sql, rm, (error, resposta) => {
+                if(error){
+                    console.log('erro na listagem -> ', error)
+                }
+                res(resposta)
+            })
+        })
+    }
+
     async logUser(rm, password){
         const sql = "SELECT * FROM users WHERE rm = ?"
         const user = await this.executarQuery(sql, [rm])
