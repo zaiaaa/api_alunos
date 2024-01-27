@@ -3,12 +3,12 @@ const { Router, response } = require('express')
 const router = Router()
 const {MercadoPagoConfig, Payment} = require('mercadopago')
 const controller = require("../controller/paymentsocket")
-
+const { socket } = require('../model/paymentsocket')
 
 router.post('/pagar', (req, res) =>{
     
     
-    const client = new MercadoPagoConfig({ accessToken: 'APP_USR-1201989797514823-111816-b7e624b0bb42a69b020716831697231c-307106413' });
+    const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN_MP });
     const payment = new Payment(client);
     
     const user = req.body
@@ -43,13 +43,16 @@ const getStatusPayment = (req, res, id) => {
     
     axios.get(`https://api.mercadopago.com/v1/payments/${id}`,{
         headers:{
-            'Authorization': `Bearer APP_USR-1201989797514823-111816-b7e624b0bb42a69b020716831697231c-307106413`
+            'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
         }
     }).then(response => {
             try{
                 if(response.data.status === "approved"){
                     controller.onPaymentApproved("PAGO")
-                }else{
+                }else if(response.data.status === "cancelled"){
+                    return
+                }
+                else{
                     setTimeout(() => getStatusPayment(req, res, id), 2000);
                 }
             }catch(e){
@@ -58,4 +61,19 @@ const getStatusPayment = (req, res, id) => {
         }
     )
 }   
+
+router.put('/cancelar/:id_payment', (req, res) => {
+    const {id_payment} = req.params
+    const status = req.body
+    console.log("cancelou")
+    axios.put(`https://api.mercadopago.com/v1/payments/${id_payment}`, status, {
+        headers:{
+            'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
+        }
+    })
+
+    controller.left("SAIU")
+})
+
+
 module.exports = {router}
